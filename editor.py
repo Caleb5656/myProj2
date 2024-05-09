@@ -28,6 +28,9 @@ class Editor:
         # menu
         self.menu = Menu()
 
+    def get_current_cell(self):
+      print(mouse_pos())
+
     #input
     def event_loop(self):
         # event looop
@@ -42,6 +45,7 @@ class Editor:
             self.pan_input(event)
             self.selection_hotkeys(event)
             self.menu_click(event)
+            self.canvas_add()
 
     def pan_input(self, event):
 
@@ -69,6 +73,10 @@ class Editor:
             if event.key == pygame.K_LEFT:
                 self.selection_index -= 1
         self.selection_index = max(min(self.selection_index, 18),2)
+
+    def canvas_add(self):
+      if mouse_buttons()[0] and not self.menu.rect.collidepoint(mouse_pos()):
+        self.get_current_cell()
 
     def menu_click(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN and self.menu.rect.collidepoint(mouse_pos()):
