@@ -29,7 +29,10 @@ class Editor:
         self.menu = Menu()
 
     def get_current_cell(self):
-      print(mouse_pos())
+        distance_to_origin = vector(mouse_pos()) - self.origin
+
+        col = int(distance_to_origin.x/ TILE_SIZE)
+        row = int(distance_to_origin.y/ TILE_SIZE)
 
     #input
     def event_loop(self):
